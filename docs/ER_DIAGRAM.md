@@ -1,47 +1,67 @@
-# 数据库 ER 图 — CampusWasteSorting
+# CampusWasteSorting — ER Diagram
+
+## 1. ER Diagram (Mermaid)
 
 ```mermaid
 erDiagram
+    users ||--o{ scan_history : identifies
+    users ||--o{ system_logs : triggers
+
     users {
-        INTEGER user_id PK "自增"
-        TEXT username UK "唯一"
-        TEXT password_hash "SHA-256"
-        TEXT role "user/admin"
-        TEXT status "active/banned"
+        int user_id PK
+        string username UK
+        string password_hash
+        string role
+        string status
     }
 
     scan_history {
-        INTEGER id PK "自增"
-        INTEGER user_id FK "用户"
-        TEXT image_path "图片路径"
-        TEXT prediction "AI细分类别"
-        REAL probability "置信度"
-        TEXT category "AI大类"
-        TEXT corrected_category "人工修正"
-        TEXT user_feedback "NULL/pending/resolved"
-        DATETIME created_at "时间"
+        int id PK
+        int user_id FK
+        string image_path
+        string prediction
+        float probability
+        string category
+        string corrected_category
+        string user_feedback
+        datetime created_at
     }
 
     system_logs {
-        INTEGER id PK "自增"
-        TEXT action_type "correction/ban/ota"
-        TEXT operator "操作人"
-        TEXT detail "详情"
-        DATETIME created_at "时间"
+        int id PK
+        string action_type
+        string operator
+        string detail
+        datetime created_at
     }
 
     announcements {
-        INTEGER id PK "自增"
-        TEXT content "公告"
-        INTEGER is_active "生效"
-        DATETIME created_at "时间"
+        int id PK
+        string content
+        int is_active
+        datetime created_at
     }
 
     encyclopedia {
-        TEXT category PK "类别"
-        TEXT content "百科正文"
+        string category PK
+        string content
     }
+```
 
-    users ||--o{ scan_history : "识别记录"
-    users ||--o{ system_logs : "审计事件"
+## 2. Table Descriptions
+
+| Table | Description |
+|---|---|
+| **users** | User auth & role management |
+| **scan_history** | Core business records with correction workflow |
+| **system_logs** | Audit trail (ban / correction / OTA) |
+| **announcements** | System-wide announcements |
+| **encyclopedia** | Waste sorting knowledge base CMS |
+
+### scan_history — Correction State Machine
+
+```
+NULL (no dispute) → pending (user reported) → resolved (admin corrected)
+          ↑                                              │
+          └──────────── (user re-disputes) ◄─────────────┘
 ```
