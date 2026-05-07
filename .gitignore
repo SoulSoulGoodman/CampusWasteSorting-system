@@ -7,3 +7,9 @@ __pycache__/
 *.pth
 *.db
 *.sqlite
+dataset/
+dataset40/
+demo/history_images/
+history_images/
+.opencode/
+openspec/

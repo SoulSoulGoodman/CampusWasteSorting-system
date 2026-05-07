@@ -1,0 +1,37 @@
+{
+  "sample_1.jpg": [
+    {
+      "label": "glass",
+      "prob": 0.5421520471572876,
+      "category": "recyclable"
+    }
+  ],
+  "sample_2.jpg": [
+    {
+      "label": "glass",
+      "prob": 0.5612454414367676,
+      "category": "recyclable"
+    }
+  ],
+  "sample_3.jpg": [
+    {
+      "label": "glass",
+      "prob": 0.5320066809654236,
+      "category": "recyclable"
+    }
+  ],
+  "sample_4.jpg": [
+    {
+      "label": "glass",
+      "prob": 0.5662497878074646,
+      "category": "recyclable"
+    }
+  ],
+  "sample_5.jpg": [
+    {
+      "label": "glass",
+      "prob": 0.559802770614624,
+      "category": "recyclable"
+    }
+  ]
+}
